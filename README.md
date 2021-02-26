@@ -4,6 +4,7 @@
 1.  chxor
     > _Description:_ Returns XOR of ASCII values of a (list of) character(s)
     - Input : a , b(optional) (strings)
+    - Output : string
    - Case 1 : Only 'a'(string) is specified
      *  returns a single char that is the XOR of all characters in a, i.e. a[0]^a[1]^...a[-1]
    - Case 2 : 'a' is a  string, 'b' is a single char (UPDATE : Works for the vice versa case also)
