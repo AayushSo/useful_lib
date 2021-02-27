@@ -21,25 +21,7 @@ def chxor(*args): ## xor of ascii value characters
 		z=0
 		for i in args[0]:
 			z=z^ord(i)
-		return chr(z)
-
-
-# def baxor(*args):
-	# if len(args)==2:
-		# a=args[0]
-		# b=args[1]
-		# if len(a)==1:
-			# return bytes([ i^a for i in b ])
-		# elif len(b)==1:
-			# return bytes([ i^b for i in a ])
-		# else:
-			# return bytes([ i^j for i,j in zip(a,b) ])
-	# elif len(args)==1:
-		# z=chr(0).encode('utf-8')
-		# for i in args[0]:
-			# z=z^i
-		# return chr(z)
-		
+		return chr(z)		
 
 def TF_list_from_num(n,l=8,inv=False,force_l = False):
 	## binary 0/1 representation of a number as False/True
@@ -67,9 +49,9 @@ def rand_id(n, iSpl="",iUpper=True, iDigits=True,iLower=True,exclude = [], exclu
 
 
 def same_type(n,m=type(None)):
-	if same_type(m,type(list)) or m == type(None): # m is type 'type' / 'NoneType'
+	if type(m) == type or m == type(None): # m is type 'type' / 'NoneType'
 		return type(n)==m
-	else raise Exception
+	else : raise Exception
 
 def isfloat(n): #n is a string type
 	return type(n)==float
