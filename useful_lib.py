@@ -3,11 +3,23 @@ from random import choices,seed as randseed
 from string import ascii_lowercase, ascii_uppercase, digits
 from math import ceil, log2
 
-def chxor(*args): ## xor of ascii value characters
+def xor (s): #xor of multiple chars s is list/tuple of chars
+	x=0
+	for i in s: x^=ord(i)
+	return chr(x)
+
+def chxor(*args, force_l = False): ## xor of ascii value characters
 	## xor of:
 	## 'a' with all characters in 'sequence_b' (or vice versa)
 	## 'sequence_a' with 'sequence_b' character-wise
+	##  multi-xor of 'sequence_1' 'sequence_2' ... 'sequence_n' character-wise
 	##	'sequence_a' charcters each with itself
+	args= list(args)
+	if force_l : # and (len(args)>2 or (len(args)==2 and len(args[0])>1 and len(args[1])>1 ) ): #-> added for speed bost
+		#print ("forcing length") #-> if you want to print it
+		m = max([len(i) for i in args])
+		for i in range(len(args)) :
+			args[i] = args[i]+'\x00'* (m-len(args[i]))
 	if len(args)==2:
 		a=args[0]
 		b=args[1]
@@ -17,11 +29,13 @@ def chxor(*args): ## xor of ascii value characters
 			return ''.join([ chr( ord(i) ^ ord(b) ) for i in a ])
 		else:
 			return ''.join([ chr( ord(i) ^ ord(j) ) for i,j in zip(a,b) ])
+	elif len(args)>2:
+			return ''.join([ xor(i) for i in zip(*args) ])
 	elif len(args)==1:
 		z=0
 		for i in args[0]:
 			z=z^ord(i)
-		return chr(z)		
+		return chr(z)
 
 def TF_list_from_num(n,l=8,inv=False,force_l = False):
 	## binary 0/1 representation of a number as False/True
